@@ -57,7 +57,7 @@ const Header = () => {
                         <div
                             className='flex gap-3'>
                             <img
-                                className=' rounded-full w-12' src={user.photoURL} alt=""
+                                className=' rounded-full w-12' src={user.photoURL ? user.photoURL : 'https://www.pngitem.com/pimgs/m/150-1503941_user-windows-10-user-icon-png-transparent-png.png'} alt=""
                             />
                             <button
                                 onClick={handleLogOut}>Log out <FontAwesomeIcon icon={faRightFromBracket} />

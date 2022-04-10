@@ -1,6 +1,6 @@
 import React from 'react';
 import { auth } from '../../firebase.init';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
+import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import { Link, useNavigate } from 'react-router-dom';
 const googleProvider = new GoogleAuthProvider()
 
@@ -24,6 +24,25 @@ const SignUp = () => {
         const email = event.target.email.value
         const password = event.target.password.value
         console.log(email, username, password);
+
+        //create account with email and password auth function
+        createUserWithEmailAndPassword(auth, username, email, password)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                console.log(user);
+                navigate('/')
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorMessage);
+                console.log(errorCode);
+                // ..
+            });
+        console.log('email from the other hand', email);
+
     }
 
     return (
@@ -41,7 +60,7 @@ const SignUp = () => {
                         className=' border-2 py-2 w-[350px] rounded-md pl-6 block mx-auto' placeholder='Create username' type="text" name="username" id="username" />
                     {/* email field */}
                     <input
-                        className=' border-2 py-2 w-[350px] rounded-md pl-6 block mx-auto' placeholder='Create email' type="email" name="email" id="email" />
+                        className=' border-2 py-2 w-[350px] rounded-md pl-6 block mx-auto' placeholder='Create email' type="text" name="email" id="email" />
                     {/* password field */}
                     <input
                         className=' border-2 py-2 w-[350px] rounded-md pl-6 block mx-auto' placeholder='Create password' type="password" name="password" id="password" />
