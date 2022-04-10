@@ -1,6 +1,4 @@
 import './App.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTree } from '@fortawesome/free-solid-svg-icons'
 import { Route, Routes } from 'react-router-dom';
 import Home from './components/Home/Home';
 import Login from './components/Login/Login';
@@ -8,10 +6,8 @@ import SignUp from './components/SignUp/SignUp';
 import Header from './components/Header/Header';
 
 
-
+//component body
 function App() {
-
-
   return (
     <div className="App bg-[#fafafa] h-screen">
 
