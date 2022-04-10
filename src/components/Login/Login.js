@@ -1,4 +1,4 @@
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase.init';
@@ -15,6 +15,30 @@ const Login = () => {
             })
             .catch(error => console.log(error))
     }
+    //handle submit form function
+    const handleSubmitForm = event => {
+        event.preventDefault()
+        const email = event.target.email.value
+        const password = event.target.password.value
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                console.log(user);
+                navigate('/')
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorMessage);
+                console.log(errorCode);
+                // ..
+            });
+        console.log('email from the other hand', email);
+
+
+    }
 
 
     return (
@@ -24,7 +48,7 @@ const Login = () => {
                 className=' text-2xl font-bold text-gray-600'>Login Website
             </p>
             {/* log in with email form */}
-            <form className='flex flex-col gap-6 ' action="">
+            <form onSubmit={handleSubmitForm} className='flex flex-col gap-6 ' action="">
                 {/* email field */}
                 <input
                     className=' border-2 py-2 w-[350px] rounded-md pl-6 block mx-auto' placeholder='Enter email' type="email" name="" id="email" />

@@ -26,7 +26,7 @@ const SignUp = () => {
         console.log(email, username, password);
 
         //create account with email and password auth function
-        createUserWithEmailAndPassword(auth, username, email, password)
+        createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
